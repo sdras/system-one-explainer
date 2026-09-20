@@ -1,6 +1,22 @@
 # System One: an interactive guide
 
-An educational site about intuitive judgment, deliberate checking, and their use as an analogy in software design. The Jev × WebMCP Chrome extension is the final case study, showing tool discovery, schema-derived questions, argument assembly, and execution policy. Jev is presented as the model inside that workflow.
+An interactive introduction to System One: fast, automatic judgments, how they differ from deliberate checking, and how this distinction can inform software design. The guide uses interactive examples to explain classification, scoring, confidence, and the policies that determine when a prediction should lead to an action.
+
+[Open the live demo](https://system-one-explainer.netlify.app/).
+
+![System One interactive guide](public/screenshot.png)
+
+## What the guide covers
+
+- Fast judgments and deliberate reasoning as modes of thinking.
+- Classification and scoring as software examples of bounded judgments.
+- Thresholds, confidence, and checks between a prediction and an action.
+- Combining independent judgments into a workflow.
+- Limitations of the analogy and of model predictions.
+
+The final section uses the Jev × WebMCP Chrome extension as a case study. It shows how a specific model and a browser tool interface implement these ideas through tool discovery, schema-derived questions, argument assembly, and execution policy.
+
+## Run locally
 
 ```sh
 npm install
@@ -13,7 +29,7 @@ npm run build
 - The psychological introduction draws on [Daniel Kahneman’s Nobel lecture](https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/). System 1 and System 2 describe modes of processing, not literal brain compartments or a universal taxonomy of AI architectures.
 - The classification, weighted-mean, threshold, and workflow instruments are software teaching examples. Their probabilities and timing are illustrative, not measurements of human cognition.
 - [TypeSafe’s System One terminology](https://docs.typesafe.ai/concepts/system-one) and [Jev quickstart](https://docs.typesafe.ai/introduction/quickstart) are discussed in the final case study. Choice, Score, Noul, and distribution-derived confidence are specific API details.
-- Jev limitations link to the [version-specific documentation](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
+- Model-specific limitations in the case study link to [Jev’s version-specific documentation](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
 - The WebMCP replay uses synthetic routing probabilities. Its call and 164 ms label reproduce the extension README example and are not a benchmark.
 
 Reviewed September 20, 2026. No demo makes model requests.
