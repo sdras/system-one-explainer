@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>System One: fast judgments and deliberate checks</title>
+    <meta name="description" content="Explore System One thinking, its limits, and how fast judgments can be used in software. Interactive examples, with Jev as a case study." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#010e1a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <header class="masthead"><a href="https://sarahdrasner.com">Sarah Drasner</a></header>
+
+    <main>
+      <section class="opening">
+        <h1>Understanding <em>System One</em></h1>
+        <div class="opening-body">
+          <div class="opening-text">
+            <p class="standfirst">Some judgments arrive quickly: recognizing a familiar pattern or noticing urgency in a message. Others require deliberate comparison and checking. System One is a way to describe the first kind. This guide explores the distinction, then applies it to software design.</p>
+            <ul class="legend">
+              <li><span class="swatch swatch-choice"></span><span class="legend-term">Recognize</span><span>identify a familiar pattern</span></li>
+              <li><span class="swatch swatch-score"></span><span class="legend-term">Evaluate</span><span>form an initial judgment</span></li>
+              <li><span class="swatch swatch-noul"></span><span class="legend-term">Check</span><span>decide what needs closer review</span></li>
+            </ul>
+          </div>
+          <figure class="opening-figure">
+            <div class="stage bare" data-scene="machine"></div>
+          </figure>
+        </div>
+
+        <dl class="spec">
+          <div><dt>System One</dt><dd>fast, automatic judgments</dd></div>
+          <div><dt>System Two</dt><dd>effortful, deliberate thought</dd></div>
+          <div><dt>Strength</dt><dd>familiar patterns</dd></div>
+          <div><dt>Risk</dt><dd>plausible but wrong impressions</dd></div>
+          <div><dt>Software analogy</dt><dd>focused prediction + checks</dd></div>
+          <div><dt>Worked example</dt><dd>Jev × WebMCP extension</dd></div>
+        </dl>
+        <p class="aside">The opening instrument illustrates a software workflow, not a model of the brain. Psychological descriptions and AI product categories should not be treated as equivalent.</p>
+      </section>
+
+      <nav class="index" aria-label="Sheets">
+        <a href="#s01"><b>01</b><span>Thinking</span></a>
+        <a href="#s02"><b class="ink-choice">02</b><span>Categories</span></a>
+        <a href="#s03"><b class="ink-score">03</b><span>Scales</span></a>
+        <a href="#s04"><b class="ink-noul">04</b><span>Thresholds</span></a>
+        <a href="#s05"><b>05</b><span>Workflow</span></a>
+        <a href="#s06"><b>06</b><span>Confidence</span></a>
+        <a href="#s07"><b>07</b><span>Limitations</span></a>
+        <a href="#s08"><b>08</b><span>Case study</span></a>
+      </nav>
+
+      <section class="sheet" id="s01">
+        <header class="sheet-head">
+          <span class="sheet-num">01</span>
+          <h2>Two modes of thinking</h2>
+          <span class="tagline">Intuition and deliberate checking.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>In the distinction popularized by Daniel Kahneman, System 1 is automatic and associative; System 2 requires attention and effort. These are descriptions of processing, not two literal compartments in the brain.</p>
+            <p>Recognizing a familiar word may happen without a conscious sequence of steps. Checking a multi-digit calculation usually requires holding intermediate results in mind. Experience and context affect which tasks feel effortless.</p>
+            <p>Speed alone does not establish accuracy. An immediate impression can be useful or misleading, and deliberate thought can also produce errors.</p>
+            <p class="aside">Select an example in the diagram. The paths illustrate the distinction; they do not measure cognition or show neural activity. Background: Kahneman’s <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/">Nobel lecture</a>.</p>
+          </div>
+          <div class="plates">
+            <figure class="plate"><div class="stage" data-scene="thinking"></div></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="s02">
+        <header class="sheet-head">
+          <span class="sheet-num ink-choice">02</span>
+          <h2>Recognizing categories</h2>
+          <span class="tagline">Select an option from a defined set.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>In software, one useful analogy to a fast judgment is classification: map an input to a defined category. A support message might concern billing, an integration problem, or a sales inquiry.</p>
+            <p>The answer space determines what the system can express. Include an “other” or “insufficient information” outcome when the categories do not cover every case.</p>
+            <p>These towers show a categorical probability distribution. The values sum to 1. Switching presets demonstrates how a clear preference differs from a tie. The values are illustrative, not measured human judgments.</p>
+            <p class="aside">This begins the software portion of the guide. Explicit probabilities are an interface design choice; they are not a defining property of human System One thinking.</p>
+          </div>
+          <div class="plates">
+            <figure class="plate"><div class="stage" data-scene="choice"></div></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="s03">
+        <header class="sheet-head">
+          <span class="sheet-num ink-score">03</span>
+          <h2>Judging on a scale</h2>
+          <span class="tagline">A probability-weighted mean.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>Some judgments concern degree rather than category. A rubric makes that degree explicit: for example, calm, frustrated but civil, and very angry.</p>
+            <ol class="callouts">
+              <li><strong>Define the scale.</strong> Assign ordered levels 0, 1, and 2 to the descriptions.</li>
+              <li><strong>Represent uncertainty.</strong> Give each level a probability, with a total of 1.</li>
+              <li><strong>Compute a summary.</strong> The weighted mean is the sum of each level number multiplied by its probability.</li>
+              <li><strong>Inspect what the mean hides.</strong> A distribution concentrated near 1 and one split between 0 and 2 can have the same mean.</li>
+            </ol>
+            <p class="aside">Using equally spaced level numbers is a modeling choice. The score is a position on this rubric, not a precise measurement of emotion.</p>
+          </div>
+          <div class="plates">
+            <figure class="plate">
+              <div class="stage" data-scene="score"></div>
+              <figcaption>These are illustrative distributions. The first assigns all probability to level 1, giving a score of 1.0. Sliders set relative weights, which are normalized to sum to 1; all-zero weights use equal probabilities.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="s04">
+        <header class="sheet-head">
+          <span class="sheet-num ink-noul">04</span>
+          <h2>From estimate to action</h2>
+          <span class="tagline">Estimate the probability of a statement.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>A probability estimate and a decision serve different purposes. An estimate describes uncertainty about an outcome. A decision also depends on what happens if it is wrong.</p>
+            <ol class="callouts">
+              <li><strong>Estimate.</strong> In this software example, a number from 0 to 1 represents the predicted probability that a message is urgent.</li>
+              <li><strong>Choose a policy.</strong> A threshold converts the estimate into a boolean. Moving the threshold changes the action without changing the evidence.</li>
+            </ol>
+            <p>Lowering the cutoff generally admits more cases, including more false positives. Raising it rejects more cases, potentially missing true positives. Evaluate that tradeoff on representative labeled data.</p>
+            <p class="aside">Both controls are simulated. The 0.90 cutoff is an example, not a universal recommendation.</p>
+          </div>
+          <div class="plates">
+            <figure class="plate"><div class="stage" data-scene="noul"></div></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="s05">
+        <header class="sheet-head">
+          <span class="sheet-num">05</span>
+          <h2>Composing a workflow</h2>
+          <span class="tagline">Evaluate independent questions in one call.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>A useful software pattern separates focused judgments from the rules that combine them. For a support ticket, estimate the topic, urgency, and frustration independently, then apply routing rules.</p>
+            <ol class="callouts">
+              <li><strong>Independent work.</strong> Questions that share the same input may be evaluated together if the implementation supports it.</li>
+              <li><strong>Dependent work.</strong> A question that needs a previous result belongs in a later step.</li>
+              <li><strong>Exact work.</strong> Use ordinary code for arithmetic, permissions, and explicit policy rules.</li>
+            </ol>
+            <p class="aside">The diagram assumes 120 ms per request: 40 sequential calls take 4.8 seconds, while the combined call is assumed to take 120 ms. This illustrates round-trip overhead, not a benchmark or a general property of System One thinking.</p>
+          </div>
+          <div class="plates">
+            <figure class="plate"><div class="stage" data-scene="parallel"></div></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="s06">
+        <header class="sheet-head">
+          <span class="sheet-num">06</span>
+          <h2>Using confidence</h2>
+          <span class="tagline">Define when to act, review, or defer.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>An initial judgment need not trigger an immediate action. A workflow can accept it, request review, or gather more information. This is a software analogy to checking an impression, not a literal implementation of System Two.</p>
+            <p>To use model confidence this way, first understand how the score is defined and how it relates to errors on your data. A value of 0.9 does not automatically mean 90% accuracy.</p>
+            <p>Calibration is a separate empirical question: among cases assigned a probability near 0.8, does the outcome occur about 80% of the time? Evaluate many examples; one correct prediction cannot establish calibration.</p>
+            <pre class="snippet"><code>// Pseudocode: thresholds require validation.
+if (confidence &lt; 0.5) {
+  gatherMoreInformation();
+} else if (confidence &lt; 0.9) {
+  requestReview();
+} else {
+  actIfAuthorized();
+}</code></pre>
+            <p class="aside">A high score does not replace permission checks or required confirmation. Human certainty and a model’s reported confidence are different things.</p>
+          </div>
+          <div class="plates">
+            <figure class="plate">
+              <div class="stage" data-scene="gates"></div>
+              <figcaption>The diagram and code use the same intervals: below 0.50, from 0.50 up to 0.90, and 0.90 or higher. Test thresholds separately for each task; consequential actions may still require confirmation at high confidence.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="s07">
+        <header class="sheet-head">
+          <span class="sheet-num">07</span>
+          <h2>Limitations</h2>
+          <span class="tagline">Where an initial judgment needs checking.</span>
+        </header>
+        <dl class="limits reveal-group">
+          <div><dt>A familiar pattern can mislead</dt><dd>A case can resemble a known example while differing in a decisive detail. Check what supports the classification.</dd></div>
+          <div><dt>Missing information</dt><dd>A plausible interpretation may depend on facts the input does not contain. Preserve an explicit way to abstain.</dd></div>
+          <div><dt>Changed conditions</dt><dd>Evaluate software on the population and conditions where it will run. Past performance may not transfer.</dd></div>
+          <div><dt>Precision and consistency</dt><dd>Use exact calculations and explicit constraints when the task requires them. Plausibility is not a substitute for a check.</dd></div>
+          <div><dt>Consequences of error</dt><dd>Choose review requirements according to the action’s consequences, not just the speed of the prediction.</dd></div>
+          <div><dt>An imperfect analogy</dt><dd>Fast software is not necessarily intuitive, and generated text is not necessarily deliberate reasoning. Assess the task and implementation directly.</dd></div>
+        </dl>
+      </section>
+
+      <section class="sheet" id="s08">
+        <header class="sheet-head">
+          <span class="sheet-num">08</span>
+          <h2>Case study: Jev × WebMCP</h2>
+          <span class="tagline">A Chrome extension for selecting and preparing tool calls.</span>
+        </header>
+        <div class="sheet-body">
+          <div class="notes">
+            <p>The <strong>Jev × WebMCP extension</strong> puts this workflow in a browser side panel. As a user types, it predicts a tool and its arguments from the tools exposed by the current page. The panel shows the proposed call, confidence, and request latency.</p>
+            <ol class="callouts">
+              <li><strong>Discover.</strong> On an enabled site, read the available WebMCP tools, descriptions, and input schemas.</li>
+              <li><strong>Evaluate.</strong> Convert those schemas into Jev questions. Select a tool, identify argument values, and allow a “no tool fits” result.</li>
+              <li><strong>Assemble.</strong> Combine the answers into a proposed call. Missing arguments remain available for manual entry.</li>
+              <li><strong>Apply policy.</strong> Run eligible read-only calls automatically when checks pass, or request user action and confirmation.</li>
+            </ol>
+            <p class="aside">WebMCP supplies the page’s tool interface. Jev supplies structured judgments. The extension connects them and controls execution. Tool selection is derived from the schemas rather than site-specific configuration.</p>
+            <p class="links"><a class="button" href="https://github.com/sdras/jev-webmcp">Explore the extension</a><a class="button quiet" href="https://developer.chrome.com/docs/ai/webmcp">WebMCP documentation</a></p>
+          </div>
+          <div class="plates">
+            <figure class="plate">
+              <div class="extension-demo-heading">A grocery search in the side panel</div>
+              <div class="stage" data-scene="wild"></div>
+              <figcaption>A simulated replay of a grocery search. Routing probabilities are illustrative throughout. The call and 164 ms label reproduce the extension README’s example, not a benchmark or a live request.</figcaption>
+            </figure>
+            <div class="extension-details">
+              <div><h3>From schema to questions</h3><p>The tool list becomes a Choice. Enum arguments become Choices; booleans become Nouls. Free-text arguments are selected from spans of the user’s input. Jev evaluates these bounded questions; application code constructs the call.</p></div>
+              <div><h3>From prediction to execution</h3><p>State-changing calls require user action. Consequential or destructive actions require additional confirmation, regardless of confidence. Page-provided schemas remain untrusted input, and a read-only annotation is not a security guarantee.</p></div>
+              <div><h3>Jev’s role</h3><p><a href="https://docs.typesafe.ai/concepts/system-one">Jev is TypeSafe’s implementation</a> of focused, typed judgments. Its Choice, Score, and Noul interfaces are concrete examples of the ideas above. Its <a href="https://docs.typesafe.ai/model-jaggedness/jev-1.13">documented limitations</a> still apply; the extension’s checks do not make predictions infallible.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p><strong>Reading further.</strong> Start with Daniel Kahneman’s <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/">Maps of Bounded Rationality</a> for the psychological distinction. The software diagrams here are teaching examples. <a href="https://docs.typesafe.ai/concepts/system-one">TypeSafe’s documentation</a> describes its particular use of the term.</p>
+      <p class="mono">Reviewed September 20, 2026. All demos run locally without model requests. By <a href="https://sarahdrasner.com">Sarah Drasner</a>. <a href="https://github.com/sdras/jev-explainer">Source</a>.</p>
+    </footer>
+  </body>
+</html>
