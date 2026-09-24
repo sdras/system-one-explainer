@@ -18,7 +18,8 @@
         <h1>Understanding <em>System One</em></h1>
         <div class="opening-body">
           <div class="opening-text">
-            <p class="standfirst">Some judgments arrive quickly: recognizing a familiar pattern or noticing urgency in a message. Others require deliberate comparison and checking. System One is a way to describe the first kind. This guide explores the distinction, then applies it to software design.</p>
+            <p class="standfirst">There are two ways of thinking: quick/reactive, and slow, with deep analysis. LLMs are System Two. System One skips text generation entirely: it answers typed classification queries over state in a single forward pass. Working directly across probability distributions gives us fast, confidence scores at unbelievable speed and cost.
+This guide explores this, then applies it to software design.</p>
             <ul class="legend">
               <li><span class="swatch swatch-choice"></span><span class="legend-term">Recognize</span><span>identify a familiar pattern</span></li>
               <li><span class="swatch swatch-score"></span><span class="legend-term">Evaluate</span><span>form an initial judgment</span></li>
@@ -242,7 +243,7 @@ if (confidence &lt; 0.5) {
 
     <footer class="colophon">
       <p><strong>Reading further.</strong> Start with Daniel Kahneman’s <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/">Maps of Bounded Rationality</a> for the psychological distinction. The software diagrams here are teaching examples. <a href="https://docs.typesafe.ai/concepts/system-one">TypeSafe’s documentation</a> describes its particular use of the term.</p>
-      <p class="mono">Reviewed September 20, 2026. All demos run locally without model requests. By <a href="https://sarahdrasner.com">Sarah Drasner</a>. <a href="https://github.com/sdras/jev-explainer">Source</a>.</p>
+      <p class="mono">All demos run locally without model requests. By <a href="https://sarah.dev">Sarah Drasner</a>. <a href="https://github.com/sdras/jev-explainer">Source</a>.</p>
     </footer>
   </body>
 </html>

@@ -207,6 +207,10 @@ h1 em {
   border-block: 1px solid var(--line);
 }
 
+.spec dt {
+  font-weight: bold;
+}
+
 .spec div {
   display: flex;
   flex-direction: column;
