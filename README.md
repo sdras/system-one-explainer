@@ -4,7 +4,7 @@ An interactive introduction to System One: fast, automatic judgments, how they d
 
 [Open the live demo](https://system-one-explainer.netlify.app/).
 
-![System One interactive guide](public/screenshot.png)
+![System One interactive guide](public/demo.gif)
 
 ## What the guide covers
 
