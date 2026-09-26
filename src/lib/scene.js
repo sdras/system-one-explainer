@@ -32,15 +32,15 @@ export function mount(el, { markup, build, loop = false }) {
     return;
   }
 
+  // Apply the initial frame (including timeline sets), without advancing it.
+  timeline.pause(0);
+
   if (loop) {
-    ScrollTrigger.create({ trigger: el, start: "top bottom", end: "bottom top", onToggle: (self) => (self.isActive ? timeline.play() : timeline.pause()) });
+    ScrollTrigger.create({ trigger: el, start: "top 75%", end: "bottom top", onToggle: (self) => (self.isActive ? timeline.play() : timeline.pause()) });
     return;
   }
 
   let stopped = false;
-  ScrollTrigger.create({ trigger: el, start: "top 72%", once: true, onEnter: () => {
-    if (!stopped) timeline.play();
-  } });
   const controls = document.createElement("div");
   controls.className = "playback-controls";
   controls.setAttribute("role", "group");
@@ -70,6 +70,11 @@ export function mount(el, { markup, build, loop = false }) {
   });
   controls.append(replay, stop);
   el.append(controls);
+
+  // Measure after the playback row is in place, then wait for this scene.
+  ScrollTrigger.create({ trigger: el, start: "top 75%", once: true, onEnter: () => {
+    if (!stopped) timeline.play();
+  } });
 }
 
 /** Tween a number and write it somewhere on every tick. */

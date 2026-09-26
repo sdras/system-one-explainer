@@ -56,7 +56,9 @@ Promise.all(faces.map((face) => document.fonts.load(face)))
 
     if (reduceMotion) return;
 
-    gsap.from("h1, .opening-text > *", { autoAlpha: 0, y: 18, duration: 0.8, stagger: 0.1, ease: "power3.out" });
+    for (const element of document.querySelectorAll("h1, .opening-text > *")) {
+      gsap.from(element, { autoAlpha: 0, y: 18, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 82%", once: true } });
+    }
     for (const group of document.querySelectorAll(".reveal-group")) {
       gsap.from(group.children, { autoAlpha: 0, y: 16, duration: 0.5, stagger: 0.06, ease: "power3.out", scrollTrigger: { trigger: group, start: "top 82%", once: true } });
     }

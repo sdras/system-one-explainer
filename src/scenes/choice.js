@@ -19,11 +19,15 @@ export function build(el){
  const view={a:0,b:0,c:0}; let selected=0;
  el.addEventListener("animation-stop",()=>gsap.killTweensOf(view));
  function paint(){[view.a,view.b,view.c].forEach((p,i)=>{columns[i].scale.y=Math.max(p*180,0.001);caps[i].position.y=13+p*180;labels[i].userData.z=16+p*180;s.setText(labels[i],`${Math.round(p*100)}%`);halos[i].material.opacity=p===Math.max(view.a,view.b,view.c)?1:0.2;});}
- function select(i){selected=i;const preset=PRESETS[i];gsap.to(view,{a:preset.p[0],b:preset.p[1],c:preset.p[2],duration:reduceMotion?0:0.9,ease:'power3.inOut',onUpdate:paint,overwrite:true});
+ function select(i,{animate=true}={}){selected=i;const preset=PRESETS[i];const target={a:preset.p[0],b:preset.p[1],c:preset.p[2]};
+ if(reduceMotion){Object.assign(view,target);paint();}
+ else if(animate)gsap.to(view,{...target,duration:0.9,ease:'power3.inOut',onUpdate:paint,overwrite:true});
+ else paint();
  el.querySelector('.choice-summary').innerHTML=`${OPTIONS.map((name,j)=>`<span>${name}<strong>${preset.p[j].toFixed(2)}</strong></span>`).join('')}`;
  el.querySelectorAll('[data-choice]').forEach((b,j)=>b.setAttribute('aria-pressed',String(i===j)));
  }
  el.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>select(Number(b.dataset.choice))));
- select(0);
+ // Fill the readout now; grow the towers only when the scene enters view.
+ select(0,{animate:false});
  return gsap.timeline({paused:true}).call(()=>select(selected),null,0.02);
 }
