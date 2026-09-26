@@ -227,8 +227,12 @@ if (confidence &lt; 0.5) {
               <figcaption>A simulated replay of a grocery search. Routing probabilities are illustrative throughout. The call and 164 ms label reproduce the extension README’s example, not a benchmark or a live request.</figcaption>
             </figure>
             <div class="extension-details">
-              <div><h3>From schema to questions</h3><p>The tool list becomes a Choice. Enum arguments become Choices; booleans become Nouls. Free-text arguments are selected from spans of the user’s input. Jev evaluates these bounded questions; application code constructs the call.</p></div>
-              <div><h3>From prediction to execution</h3><p>State-changing calls require user action. Consequential or destructive actions require additional confirmation, regardless of confidence. Page-provided schemas remain untrusted input, and a read-only annotation is not a security guarantee.</p></div>
+              <div><h3>Schema Mapping</h3><ul>
+                <li>Tools & Enums: Converted into discrete categorical choices.</li>
+                <li>Booleans: Mapped to true/false evaluations.</li>
+                <li>Free-text: Selected from spans of the user’s input.</li>
+              </ul></div>
+              <div><h3>From prediction to execution</h3><p>Model predictions are strictly decoupled from execution rights. State-changing calls require user initiation, and high-consequence actions demand secondary confirmation regardless of reported confidence.</p></div>
               <div><h3>Jev’s role</h3><p><a href="https://docs.typesafe.ai/concepts/system-one">Jev is TypeSafe’s implementation</a> of focused, typed judgments. Its Choice, Score, and Noul interfaces are concrete examples of the ideas above. Its <a href="https://docs.typesafe.ai/model-jaggedness/jev-1.13">documented limitations</a> still apply; the extension’s checks do not make predictions infallible.</p></div>
             </div>
           </div>
