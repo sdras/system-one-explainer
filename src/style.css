@@ -1,3 +1,9 @@
+@import "@fontsource/big-shoulders-display/700";
+@import "@fontsource/big-shoulders-display/900";
+@import "@fontsource/alegreya/latin-400-italic.css";
+@import "@fontsource-variable/archivo";
+@import "@fontsource-variable/jetbrains-mono";
+
 /* A datasheet for a model. Night Owl inks on a near-black ground, a 12-column
    grid held together by hairlines, condensed caps for structure, mono for data. */
 :root {
@@ -135,6 +141,7 @@ h1 {
 }
 
 h1 em {
+  display: block;
   color: var(--mid);
   font-style: normal;
 }
@@ -1095,22 +1102,22 @@ svg .ink-high { fill: var(--high); }
 .extension-details p, .extension-details ul { color: var(--body); font-size: 14px; line-height: 1.6; }
 
 /* Editorial hierarchy: descriptive captions, quieter navigation, open spacing. */
-.masthead { justify-content: flex-end; padding-block: 28px 8px; border: 0; font-family: var(--sans); font-size: 14px; letter-spacing: 0; text-transform: none; }
+.masthead { justify-content: flex-end; padding-block: 18px 4px; border: 0; font-family: var(--sans); font-size: 14px; letter-spacing: 0; text-transform: none; }
 .masthead a { color: var(--muted); text-decoration: none; }
 .masthead a:hover { color: var(--text); }
-h1 { padding-top: 28px; }
-.opening-body { margin-top: 36px; column-gap: 40px; }
-.opening-text { gap: 30px; }
-.standfirst { line-height: 1.6; max-width: 35ch; }
+h1 { padding-top: 60px; }
+.opening-body { margin-top: 24px; column-gap: 32px; }
+.opening-text { gap: 20px; }
+.standfirst { line-height: 1.5; max-width: 35ch; }
 .legend { gap: 10px; }
 .legend-term { width: 82px; color: var(--text); font-size: 15px; }
 .swatch { width: 6px; height: 6px; }
 .opening-figure { margin-top: 0; }
-.spec { margin-top: 38px; padding-block: 10px; }
+.spec { margin-top: 24px; padding-block: 6px; }
 .spec dt { font: 500 13px/1.5 var(--sans); letter-spacing: 0; color: var(--text); }
 .spec dd { font: 14px/1.6 var(--sans); color: var(--muted); }
-.spec div { gap: 9px; padding-inline: 20px; }
-.opening > .aside { max-width: 80ch; padding-block: 24px 44px; }
+.spec div { gap: 6px; padding: 10px 20px; }
+.opening > .aside { max-width: 80ch; padding-block: 16px 24px; }
 .index { font-family: var(--sans); font-size: 13px; }
 .index a { align-items: baseline; gap: 9px; padding-block: 18px; border-left: 0; }
 .index b { font: 500 12px var(--sans); }
@@ -1142,14 +1149,14 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
 .extension-details { padding: 28px; gap: 26px; }
 .colophon { padding-block: 48px 72px; }
 @media (max-width: 900px) {
-  .opening-body { margin-top: 28px; row-gap: 34px; }
+  .opening-body { margin-top: 24px; row-gap: 28px; }
   .standfirst { max-width: 55ch; }
   .sheet-body { row-gap: 30px; }
   .spec div { padding-left: 0; }
   .notes { position: static; }
 }
 @media (max-width: 600px) {
-  .masthead { padding-top: 20px; font-size: 13px; }
+  .masthead { padding-top: 16px; font-size: 13px; }
   h1 { font-size: clamp(58px,14vw,84px); }
   .sheet { padding-block: 42px 48px; gap: 26px; }
   .sheet-head { grid-template-columns: 32px minmax(0,1fr); column-gap: 12px; row-gap: 10px; }
@@ -1211,7 +1218,7 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
   box-shadow: inset 0 -2px var(--accent);
 }
 .judgment-examples button:focus-visible { position: relative; z-index: 1; }
-.judgment-input { padding: 18px 20px 14px; border: 1px solid var(--line); border-top: 0; }
+.judgment-input { padding: 12px 16px 10px; border: 1px solid var(--line); border-top: 0; }
 .judgment-label { display: block; color: var(--muted); font: 12px/1.5 var(--mono); }
 .judgment-message {
   min-height: 2.9em;
@@ -1221,8 +1228,8 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
 }
 .judgment-message mark { background: transparent; color: var(--noul); }
 .judgment-question { color: var(--muted); font-size: 13px; }
-.judgment-drawing { position: relative; padding-block: 5px 24px; }
-.stage .judgment-svg { max-width: none; overflow: visible; }
+.judgment-drawing { position: relative; padding-block: 0 20px; }
+.stage .judgment-svg { max-width: 620px; overflow: visible; }
 .judgment-grid { fill: none; stroke: #24506f; stroke-width: .8; opacity: .6; }
 .judgment-wires { fill: none; stroke: #31526a; stroke-width: 1.5; }
 .judgment-signal {
@@ -1273,7 +1280,7 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
 }
 .judgment-replay span { color: var(--noul); font-size: 21px; }
 .judgment-replay:hover { color: var(--text); }
-.judgment-policy { padding-block: 12px 18px; }
+.judgment-policy { padding-block: 8px 12px; }
 .judgment-policy-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; }
 .judgment-cutoff-value { color: var(--mid); font: 17px var(--mono); }
 .judgment-policy input {
@@ -1298,8 +1305,8 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
   display: flex;
   align-items: center;
   gap: 14px;
-  min-height: 82px;
-  padding: 14px 16px;
+  min-height: 70px;
+  padding: 10px 14px;
   border: 1px solid var(--line);
   border-left: 2px solid var(--decision-color);
   background: color-mix(in srgb, var(--decision-color) 5%, var(--bg));
@@ -1307,10 +1314,15 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
 .judgment-route-icon { color: var(--decision-color); font: 30px/1 var(--mono); }
 .judgment-verdict { display: block; margin-top: 3px; color: var(--decision-color); font: 500 20px/1.3 var(--sans); }
 .judgment-comparison { margin-left: auto; color: var(--decision-color); font: 13px var(--mono); white-space: nowrap; }
-.judgment-explanation { min-height: 4.5em; padding-top: 14px; color: var(--body); font-size: 14px; line-height: 1.6; }
+.judgment-explanation { min-height: 4.1em; padding-top: 10px; color: var(--body); font-size: 14px; line-height: 1.6; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 @media (max-width: 1100px) and (min-width: 901px) {
   .opening-body { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 28px; }
+}
+/* Keep the opening controls within reach on shorter laptop screens. */
+@media (min-width: 901px) and (max-height: 820px) {
+  .opening-body { margin-top: 20px; }
+  .stage .judgment-svg { max-width: 560px; }
 }
 @media (max-width: 600px) {
   .judgment-input { padding-inline: 14px; }

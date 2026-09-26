@@ -132,7 +132,7 @@ export function build(el) {
     if (announce) el.querySelector(".judgment-announcement").textContent = `${example.name}: ${distribution}. Cutoff ${percent(threshold)}. ${verdict}. ${example.explanation}`;
   }
 
-  function prepareAnimation() {
+  function prepareAnimation({ entrance = false } = {}) {
     timeline.pause().clear();
     const target = Object.fromEntries(examples[selected].probabilities.map((p, i) => [`p${i}`, p]));
     gsap.set(el.querySelector(".judgment-chip-flash"), { opacity: 0 });
@@ -142,12 +142,15 @@ export function build(el) {
       draw();
       return;
     }
+    // Ease into the first pass; direct interactions keep their original pace.
+    const start = entrance ? 0.2 : 0;
+    const pace = entrance ? 1.25 : 1;
     timeline
-      .set(el.querySelector(".judgment-signal"), { opacity: 1 })
-      .to(el.querySelector(".judgment-signal"), { strokeDashoffset: 0, duration: 0.85, ease: "power1.inOut" })
-      .to(el.querySelector(".judgment-chip-flash"), { opacity: 0.7, duration: 0.18, repeat: 1, yoyo: true }, 0.18)
-      .to(values, { ...target, duration: 0.7, ease: "power3.out", onUpdate: draw }, 0.32)
-      .to(el.querySelector(".judgment-signal"), { opacity: 0, duration: 0.25 }, 0.85);
+      .set(el.querySelector(".judgment-signal"), { opacity: 1 }, start)
+      .to(el.querySelector(".judgment-signal"), { strokeDashoffset: 0, duration: 0.85 * pace, ease: "power1.inOut" }, start)
+      .to(el.querySelector(".judgment-chip-flash"), { opacity: 0.7, duration: 0.18 * pace, repeat: 1, yoyo: true }, start + 0.18 * pace)
+      .to(values, { ...target, duration: 0.7 * pace, ease: "power3.out", onUpdate: draw }, start + 0.32 * pace)
+      .to(el.querySelector(".judgment-signal"), { opacity: 0, duration: 0.25 * pace }, start + 0.85 * pace);
   }
 
   function choose(index) {
@@ -176,6 +179,6 @@ export function build(el) {
   });
   updateDecision();
   draw();
-  prepareAnimation();
+  prepareAnimation({ entrance: true });
   return timeline;
 }

@@ -1,10 +1,3 @@
-import "@fontsource/big-shoulders-display/700";
-import "@fontsource/big-shoulders-display/900";
-import "@fontsource/alegreya/latin-400-italic.css";
-import "@fontsource-variable/archivo";
-import "@fontsource-variable/jetbrains-mono";
-import "./style.css";
-
 import { gsap } from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -29,7 +22,8 @@ const scenes = { machine: { ...machine, loop: true }, choice, score, noul, paral
 // measure text. Both need the real fonts, so ask for each face and wait.
 const faces = ['900 40px "Big Shoulders Display"', '400 16px "JetBrains Mono Variable"', '600 16px "JetBrains Mono Variable"'];
 
-Promise.all(faces.map((face) => document.fonts.load(face)))
+// A failed font download should still leave the demos usable with fallbacks.
+Promise.allSettled(faces.map((face) => document.fonts.load(face)))
   .then(() => document.fonts.ready)
   .then(() => {
     for (const el of document.querySelectorAll("[data-scene]")) mount(el, scenes[el.dataset.scene]);
@@ -56,10 +50,14 @@ Promise.all(faces.map((face) => document.fonts.load(face)))
 
     if (reduceMotion) return;
 
+    // Text may already have painted while fonts and scenes were loading.
+    // Reveal only content below the viewport, so visible text never blinks out.
     for (const element of document.querySelectorAll("h1, .opening-text > *")) {
-      gsap.from(element, { autoAlpha: 0, y: 18, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 82%", once: true } });
+      if (element.getBoundingClientRect().top < window.innerHeight) continue;
+      gsap.from(element, { autoAlpha: 0, y: 18, duration: 1.2, delay: 0.2, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 82%", once: true } });
     }
     for (const group of document.querySelectorAll(".reveal-group")) {
+      if (group.getBoundingClientRect().top < window.innerHeight) continue;
       gsap.from(group.children, { autoAlpha: 0, y: 16, duration: 0.5, stagger: 0.06, ease: "power3.out", scrollTrigger: { trigger: group, start: "top 82%", once: true } });
     }
 
