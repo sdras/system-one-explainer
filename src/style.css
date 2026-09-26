@@ -98,6 +98,10 @@ strong {
   fill: var(--muted);
 }
 
+.text-accent {
+  color: rgb(150, 175, 222);
+}
+
 /* ---------- masthead + opening ---------- */
 
 .masthead {
@@ -352,7 +356,7 @@ h2 {
 }
 
 .aside {
-  color: var(--body);
+  color: rgb(150, 175, 222);
   font-size: 15.5px;
   line-height: 1.5;
 }
@@ -1090,7 +1094,7 @@ h1 { padding-top: 28px; }
 .swatch { width: 6px; height: 6px; }
 .opening-figure { margin-top: 0; }
 .spec { margin-top: 38px; padding-block: 10px; }
-.spec dt { font: 500 13px/1.5 var(--sans); text-transform: none; letter-spacing: 0; color: var(--text); }
+.spec dt { font: 500 13px/1.5 var(--sans); letter-spacing: 0; color: var(--text); }
 .spec dd { font: 14px/1.6 var(--sans); color: var(--muted); }
 .spec div { gap: 9px; padding-inline: 20px; }
 .opening > .aside { max-width: 80ch; padding-block: 24px 44px; font-size: 14px; line-height: 1.7; }
