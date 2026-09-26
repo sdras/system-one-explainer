@@ -84,7 +84,7 @@
           <div class="notes">
             <p>In software architecture, classification serves as a natural analogue to quick human judgment: both rapidly map a complex input to a predetermined category. A customer support message, for instance, might be routed to billing, technical integration, or sales.</p>
             <p>The answer space determines what the system can express. Because a system can only express what its answer space allows, including graceful fallback categories like "other" or "insufficient information" is essential.</p>
-            <p>The visualizations here illustrate categorical probability distributions, where the sum of all outcomes equals 1. Toggling between presets demonstrates the contrast between a decisive confidence score and a near-tie.</p>
+            <p class="aside">The visualizations here illustrate categorical probability distributions, where the sum of all outcomes equals 1. Toggling between presets demonstrates the contrast between a decisive confidence score and a near-tie.</p>
           </div>
           <div class="plates">
             <figure class="plate"><div class="stage" data-scene="choice"></div></figure>
@@ -100,14 +100,14 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>Some judgments concern degree rather than category. A rubric makes that degree explicit: for example, calm, frustrated but civil, and very angry.</p>
+            <p>Some judgments measure degree rather than category. An ordered rubric can help make this explicit. For example, one could score a tone as 0 (calm), 1 (frustrated but civil), or 2 (very angry)..</p>
             <ol class="callouts">
               <li><strong>Define the scale.</strong> Assign ordered levels 0, 1, and 2 to the descriptions.</li>
               <li><strong>Represent uncertainty.</strong> Give each level a probability, with a total of 1.</li>
               <li><strong>Compute a summary.</strong> The weighted mean is the sum of each level number multiplied by its probability.</li>
               <li><strong>Inspect what the mean hides.</strong> A distribution concentrated near 1 and one split between 0 and 2 can have the same mean.</li>
             </ol>
-            <p class="aside">Using equally spaced level numbers is a modeling choice. The score is a position on this rubric, not a precise measurement of emotion.</p>
+            <p class="aside">Assigning equally spaced numbers to these levels is a deliberate design choice, not a precise measurement of feeling. The final score simply marks a relative position on this rubric.</p>
           </div>
           <div class="plates">
             <figure class="plate">
@@ -126,12 +126,12 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>A probability estimate and a decision serve different purposes. An estimate describes uncertainty about an outcome. A decision also depends on what happens if it is wrong.</p>
+            <p>Predicting an outcome and acting on it are two different things. An estimate measures uncertainty, and a decision balances that uncertainty against the cost of an error.</p>
             <ol class="callouts">
-              <li><strong>Estimate.</strong> In this software example, a number from 0 to 1 represents the predicted probability that a message is urgent.</li>
-              <li><strong>Choose a policy.</strong> A threshold converts the estimate into a boolean. Moving the threshold changes the action without changing the evidence.</li>
+              <li><strong>Estimate.</strong> A score from 0 to 1 indicates the predicted probability that a message is urgent.</li>
+              <li><strong>Policy.</strong> A decision threshold converts this score into a boolean action. Shifting the threshold changes the system's behavior without altering the underlying evidence.</li>
             </ol>
-            <p>Lowering the cutoff generally admits more cases, including more false positives. Raising it rejects more cases, potentially missing true positives. Evaluate that tradeoff on representative labeled data.</p>
+            <p>A lower cutoff catches more cases but triggers more false alarms. A higher cutoff avoids false alarms but misses real cases. Choose your threshold by testing this tradeoff on labeled data.</p>
             <p class="aside">Both controls are simulated. The 0.90 cutoff is an example, not a universal recommendation.</p>
           </div>
           <div class="plates">

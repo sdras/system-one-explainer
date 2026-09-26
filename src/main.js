@@ -1,5 +1,6 @@
 import "@fontsource/big-shoulders-display/700";
 import "@fontsource/big-shoulders-display/900";
+import "@fontsource/alegreya/latin-400-italic.css";
 import "@fontsource-variable/archivo";
 import "@fontsource-variable/jetbrains-mono";
 import "./style.css";

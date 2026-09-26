@@ -28,6 +28,7 @@
   --gap: 24px;
   --display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
   --sans: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --aside: "Alegreya", Georgia, "Times New Roman", serif;
   --mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -357,8 +358,11 @@ h2 {
 
 .aside {
   color: rgb(150, 175, 222);
-  font-size: 15.5px;
-  line-height: 1.5;
+  font-family: var(--aside);
+  font-size: 1.125rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .callouts {
@@ -1097,7 +1101,7 @@ h1 { padding-top: 28px; }
 .spec dt { font: 500 13px/1.5 var(--sans); letter-spacing: 0; color: var(--text); }
 .spec dd { font: 14px/1.6 var(--sans); color: var(--muted); }
 .spec div { gap: 9px; padding-inline: 20px; }
-.opening > .aside { max-width: 80ch; padding-block: 24px 44px; font-size: 14px; line-height: 1.7; }
+.opening > .aside { max-width: 80ch; padding-block: 24px 44px; }
 .index { font-family: var(--sans); font-size: 13px; }
 .index a { align-items: baseline; gap: 9px; padding-block: 18px; border-left: 0; }
 .index b { font: 500 12px var(--sans); }
