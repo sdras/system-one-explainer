@@ -18,13 +18,14 @@
         <h1>Understanding <em>System One</em></h1>
         <div class="opening-body">
           <div class="opening-text">
-            <p class="standfirst">If there are two ways of thinking: quick/reactive, and slow, with deep analysis, then LLMs are System Two. System One models skip text generation entirely: it answers typed classification queries over state in a single forward pass.</p>
-            <p>Working directly across probability distributions gives us confidence scores at high speed and low cost. This guide explores this, then applies it to software design.</p>
-            <ul class="legend">
+            <p style="color: #96afde">Thinking can be described in two modes: System One is fast and intuitive, System Two is slow and deliberate. LLMs can support both, but thorough reasoning takes time and compute.</p>
+            <p class="standfirst">System One models skips text generation. Given state and a classification question with predefined answer types, they predict probabilities in a single forward pass.</p>
+            <p style="color: #96afde">This produces fast, low-cost predictions with scores that express the model’s confidence. This guide explains how the approach works, then applies it to software design.</p>
+            <!-- <ul class="legend">
               <li><span class="swatch swatch-choice"></span><span class="legend-term">Recognize</span><span>identify a familiar pattern</span></li>
               <li><span class="swatch swatch-score"></span><span class="legend-term">Evaluate</span><span>form an initial judgment</span></li>
               <li><span class="swatch swatch-noul"></span><span class="legend-term">Check</span><span>decide what needs closer review</span></li>
-            </ul>
+            </ul> -->
           </div>
           <figure class="opening-figure">
             <div class="stage bare" data-scene="machine"></div>
@@ -39,7 +40,7 @@
           <div><dt>Software analogy</dt><dd>focused prediction + checks</dd></div>
           <div><dt>Worked example</dt><dd>Jev × WebMCP extension</dd></div>
         </dl>
-        <p class="aside">The opening instrument illustrates a software workflow, not a model of the brain. Psychological descriptions and AI product categories should not be treated as equivalent.</p>
+        <p class="aside">We are illustrating a software workflow, not a model of the brain. Psychological descriptions and AI product categories should not be treated as equivalent.</p>
       </section>
 
       <nav class="index" aria-label="Sheets">
@@ -61,9 +62,9 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>In the distinction popularized by Daniel Kahneman, System 1 is automatic and associative; System 2 requires attention and effort. These are descriptions of processing, not two literal compartments in the brain.</p>
+            <p>In the distinction popularized by Daniel Kahneman, System One is automatic and associative; System Two requires attention and effort. These are descriptions of processing, not two literal compartments in the brain.</p>
             <p>Recognizing a familiar word may happen without a conscious sequence of steps. Checking a multi-digit calculation usually requires holding intermediate results in mind. Experience and context affect which tasks feel effortless.</p>
-            <p>Speed alone does not establish accuracy. An immediate impression can be useful or misleading, and deliberate thought can also produce errors.</p>
+            <p>Speed alone does not establish accuracy. An immediate impression can be useful or misleading, and deliberate thought can also produce errors. Very useful for some scenarios, not a good fit for everything. </p>
             <p class="aside">Select an example in the diagram. The paths illustrate the distinction; they do not measure cognition or show neural activity. Background: Kahneman’s <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/">Nobel lecture</a>.</p>
           </div>
           <div class="plates">
