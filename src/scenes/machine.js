@@ -3,10 +3,10 @@ import { gsap } from "gsap";
 // Fixed teaching examples, not keyword matching or model output.
 const examples = [
   { name: "Clear signal", message: '“I was <mark>charged twice</mark> for the same invoice.”', probabilities: [0.94, 0.04, 0.02], explanation: "A clear billing signal. Raise the cutoff above 94% to send even this prediction for review." },
-  { name: "Mixed signals", message: '“My <mark>upgrade failed</mark>, but the <mark>payment went through</mark>.”', probabilities: [0.46, 0.48, 0.06], explanation: "Almost a tie. A lower cutoff can allow routing, but it does not make the evidence any clearer." },
+  { name: "Mixed signals", message: '“I <mark>paid for an upgrade</mark>, but the new features are <mark>still locked</mark>.”', probabilities: [0.46, 0.48, 0.06], explanation: "Almost a tie between billing and access. A lower cutoff can allow routing, but it does not make the evidence any clearer." },
   { name: "No context", message: '“<mark>Something is wrong.</mark> Can you help me sort it out?”', probabilities: [0.19, 0.23, 0.58], explanation: "No clear topic. An explicit “other” answer gives the workflow a way to ask for more context." },
 ];
-const categories = ["Billing", "Technical", "Other"];
+const categories = ["Billing", "Access", "Other"];
 const colors = ["#82aaff", "#ecc48d", "#7fdbca"];
 const percent = (value) => `${Math.round(value * 100)}%`;
 
@@ -26,7 +26,6 @@ const towers = categories.map((name, i) => `
 
 export const markup = `
   <div class="judgment" data-route="act">
-    <div class="judgment-heading"><span><i aria-hidden="true"></i> From input to action</span><span class="judgment-example-count" aria-hidden="true">01 / 03</span></div>
     <div class="judgment-examples" role="group" aria-label="Choose an example message">
       ${examples.map((example, i) => `<button type="button" data-example="${i}" aria-pressed="${i === 0}">${example.name}</button>`).join("")}
     </div>
@@ -82,7 +81,6 @@ export const markup = `
       <span class="judgment-comparison">94% ≥ 80%</span>
     </div>
     <p class="judgment-explanation">${examples[0].explanation}</p>
-    <div class="judgment-footer"><span>Change the message. Move the cutoff.</span><span>Illustrative probabilities</span></div>
     <p class="sr-only judgment-announcement" role="status" aria-atomic="true"></p>
   </div>`;
 
@@ -156,7 +154,6 @@ export function build(el) {
     selected = index;
     el.querySelectorAll("[data-example]").forEach((button, i) => button.setAttribute("aria-pressed", String(i === index)));
     el.querySelector(".judgment-message").innerHTML = examples[index].message;
-    el.querySelector(".judgment-example-count").textContent = `0${index + 1} / 03`;
     el.querySelector(".judgment-explanation").textContent = examples[index].explanation;
     updateDecision(true);
     prepareAnimation();

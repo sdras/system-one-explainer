@@ -21,11 +21,6 @@
             <p class="text-accent">Thinking can be described in two modes: System One is fast and intuitive, System Two is slow and deliberate. LLMs can support both, but thorough reasoning takes time and compute.</p>
             <p class="standfirst">System One models skip text generation. Given state and a bounded question with predefined answer types, they predict probabilities in a single forward pass.</p>
             <p class="text-accent">This produces fast, low-cost predictions with scores that express the model’s confidence. This guide explains how the approach works, then applies it to software design.</p>
-            <!-- <ul class="legend">
-              <li><span class="swatch swatch-choice"></span><span class="legend-term">Recognize</span><span>identify a familiar pattern</span></li>
-              <li><span class="swatch swatch-score"></span><span class="legend-term">Evaluate</span><span>form an initial judgment</span></li>
-              <li><span class="swatch swatch-noul"></span><span class="legend-term">Check</span><span>decide what needs closer review</span></li>
-            </ul> -->
           </div>
           <figure class="opening-figure">
             <div class="stage bare" data-scene="machine"></div>
@@ -148,13 +143,13 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>A useful software pattern separates focused judgments from the rules that combine them. For a support ticket, estimate the topic, urgency, and frustration independently, then apply routing rules.</p>
+            <p>Decoupling feature evaluation from decision logic provides a robust design pattern for intelligent systems. Rather than monolithically processing a support ticket, the architecture estimates discrete attributes in isolation: classification, urgency, and sentiment. It then delegates decision execution to a rules engine.</p>
             <ol class="callouts">
-              <li><strong>Independent work.</strong> Questions that share the same input may be evaluated together if the implementation supports it.</li>
-              <li><strong>Dependent work.</strong> A question that needs a previous result belongs in a later step.</li>
-              <li><strong>Exact work.</strong> Use ordinary code for arithmetic, permissions, and explicit policy rules.</li>
+              <li><strong>Parallel Execution:</strong> Evaluative tasks that consume the same input can run concurrently when supported by the architecture.</li>
+              <li><strong>Sequential Pipelines:</strong> Chain dependent tasks so downstream steps receive upstream outputs.</li>
+              <li><strong>Deterministic Execution:</strong> Guardrails, financial calculations,and policy constraints should always be handled via deterministic code rather than probabilistic models.</li>
             </ol>
-            <p class="aside">The diagram assumes 120 ms per request: 40 sequential calls take 4.8 seconds, while the combined call is assumed to take 120 ms. This illustrates round-trip overhead, not a benchmark or a general property of System One thinking.</p>
+            <p class="aside">The diagram assumes 120 ms per request: 40 sequential calls take 4.8 seconds, while the combined call is assumed to take 120 ms.</p>
           </div>
           <div class="plates">
             <figure class="plate"><div class="stage" data-scene="parallel"></div></figure>
@@ -170,9 +165,8 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>An initial judgment need not trigger an immediate action. A workflow can accept it, request review, or gather more information. This is a software analogy to checking an impression, not a literal implementation of System Two.</p>
-            <p>To use model confidence this way, first understand how the score is defined and how it relates to errors on your data. A value of 0.9 does not automatically mean 90% accuracy.</p>
-            <p>Calibration is a separate empirical question: among cases assigned a probability near 0.8, does the outcome occur about 80% of the time? Evaluate many examples; one correct prediction cannot establish calibration.</p>
+            <p>Model predictions don't need to execute immediately. Workflows can pause, request review, or gather more data. We can implement checks on a fast impression.</p>
+            <p>Relying on confidence scores requires verifying calibration across large test sets: a 0.9 score doesn't mean 90% accuracy unless cases rated at 80% actually succeed 80% of the time.</p>
             <pre class="snippet"><code>// Pseudocode: thresholds require validation.
 if (confidence &lt; 0.5) {
   gatherMoreInformation();
@@ -181,12 +175,12 @@ if (confidence &lt; 0.5) {
 } else {
   actIfAuthorized();
 }</code></pre>
-            <p class="aside">A high score does not replace permission checks or required confirmation. Human certainty and a model’s reported confidence are different things.</p>
+            <p class="aside">High confidence never replaces access controls or policy checks. Tune these thresholds for each specific task. High-risk actions may always require human confirmation regardless of score.</p>
           </div>
           <div class="plates">
             <figure class="plate">
               <div class="stage" data-scene="gates"></div>
-              <figcaption>The diagram and code use the same intervals: below 0.50, from 0.50 up to 0.90, and 0.90 or higher. Test thresholds separately for each task; consequential actions may still require confirmation at high confidence.</figcaption>
+              <figcaption>TThe diagram and code use the same intervals. Test thresholds separately for each task.</figcaption>
             </figure>
           </div>
         </div>
@@ -199,11 +193,11 @@ if (confidence &lt; 0.5) {
           <span class="tagline">Where an initial judgment needs checking.</span>
         </header>
         <dl class="limits reveal-group">
-          <div><dt>A familiar pattern can mislead</dt><dd>A case can resemble a known example while differing in a decisive detail. Check what supports the classification.</dd></div>
-          <div><dt>Missing information</dt><dd>A plausible interpretation may depend on facts the input does not contain. Preserve an explicit way to abstain.</dd></div>
-          <div><dt>Changed conditions</dt><dd>Evaluate software on the population and conditions where it will run. Past performance may not transfer.</dd></div>
-          <div><dt>Precision and consistency</dt><dd>Use exact calculations and explicit constraints when the task requires them. Plausibility is not a substitute for a check.</dd></div>
-          <div><dt>Consequences of error</dt><dd>Choose review requirements according to the action’s consequences, not just the speed of the prediction.</dd></div>
+          <div><dt>False Familiarity</dt><dd>A case can closely resemble a known pattern while differing in one decisive detail. Always inspect the evidence supporting a classification.</dd></div>
+          <div><dt>Incomplete Data</dt><dd>When inputs lack required context, ensure the system can explicitly abstain rather than guess.</dd></div>
+          <div><dt>Changed conditions</dt><dd>Test models against the target production environment. Past accuracy does not transfer automatically.</dd></div>
+          <div><dt>Precision and consistency</dt><dd>Use deterministic code for precise calculations and policy checks. Plausibility is not proof.</dd></div>
+          <div><dt>Consequences of error</dt><dd>Set review requirements based on the real-world consequences of an error, not the speed or fluency of the prediction.</dd></div>
           <div><dt>An imperfect analogy</dt><dd>Fast software is not necessarily intuitive, and generated text is not necessarily deliberate reasoning. Assess the task and implementation directly.</dd></div>
         </dl>
       </section>
