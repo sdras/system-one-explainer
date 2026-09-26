@@ -1092,7 +1092,7 @@ svg .ink-high { fill: var(--high); }
 .extension-demo-heading .mono { color: var(--noul); letter-spacing: .06em; }
 .extension-details { display: grid; gap: 18px; padding: 22px; border: 1px solid var(--line); background: var(--panel); }
 .extension-details h3 { margin: 0 0 7px; font-size: 16px; font-weight: 600; }
-.extension-details p { color: var(--body); font-size: 14px; line-height: 1.6; }
+.extension-details p, .extension-details ul { color: var(--body); font-size: 14px; line-height: 1.6; }
 
 /* Editorial hierarchy: descriptive captions, quieter navigation, open spacing. */
 .masthead { justify-content: flex-end; padding-block: 28px 8px; border: 0; font-family: var(--sans); font-size: 14px; letter-spacing: 0; text-transform: none; }
