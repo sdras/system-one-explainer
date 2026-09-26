@@ -20,7 +20,7 @@ export const markup = `
     <div class="sliders">
       ${LEVELS.map((name, i) => `<label><span class="mono">${i}</span> <span class="muted">${name}</span><input type="range" min="0" max="100" value="0" data-level="${i}"></label>`).join("")}
     </div>
-    <div class="presets">${PRESETS.map((preset, i) => `<button type="button" data-preset="${i}">${preset.name}</button>`).join("")}</div>
+    <div class="presets">${PRESETS.map((preset, i) => `<button type="button" data-preset="${i}" aria-pressed="${i === 0}">${preset.name}</button>`).join("")}</div>
   </div>
 `;
 
@@ -64,18 +64,26 @@ export function build(el) {
 
   el.addEventListener("animation-stop", () => gsap.killTweensOf(beam.view));
 
+  const presetButtons = $$(el, "[data-preset]");
+  const setPresetState = (activeIdx) => {
+    presetButtons.forEach((b, i) => b.setAttribute("aria-pressed", String(i === activeIdx)));
+  };
+
   const setSliders = (p) => sliders.forEach((s, i) => (s.value = Math.round(p[i] * 100)));
   sliders.forEach((slider) =>
     slider.addEventListener("input", () => {
+      setPresetState(-1);
       // Sliders are weights. Probabilities are the weights, normalised.
       const weights = sliders.map((s) => Number(s.value));
       const total = weights.reduce((a, b) => a + b, 0);
       beam.to(total ? weights.map((w) => w / total) : [1 / 3, 1 / 3, 1 / 3], { duration: 0.35 });
     }),
   );
-  $$(el, "[data-preset]").forEach((button) =>
+  presetButtons.forEach((button) =>
     button.addEventListener("click", () => {
-      const { p } = PRESETS[button.dataset.preset];
+      const idx = Number(button.dataset.preset);
+      const { p } = PRESETS[idx];
+      setPresetState(idx);
       setSliders(p);
       beam.to(p, { duration: 0.8 });
     }),
@@ -87,6 +95,7 @@ export function build(el) {
   // after zero so that Replay crosses it again.
   return gsap.timeline({ paused: true }).add(() => {
     Object.assign(beam.view, { p0: 0, p1: 0, p2: 0, fulcrum: 1, tilt: 0 });
+    setPresetState(0);
     setSliders(PRESETS[0].p);
     beam.to(PRESETS[0].p, { duration: 1.1 });
   }, 0.02);

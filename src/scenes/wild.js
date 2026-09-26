@@ -41,8 +41,8 @@ export const markup = svg(
     <text class="mono code-line" x="44" y="232"><tspan class="f">search_products</tspan>({</text>
     <text class="mono code-line" x="44" y="304">})</text>
   </g>
-  <text class="mono code-line wild-department" x="66" y="256"><tspan class="k">department</tspan>: <tspan class="s">"Bakery"</tspan>,</text>
-  <text class="mono code-line wild-dietary" x="66" y="280"><tspan class="k">dietary</tspan>: [<tspan class="s">"gluten-free"</tspan>]</text>
+  <text class="mono code-line wild-dietary" x="66" y="256"><tspan class="k">dietary</tspan>: [<tspan class="s">"gluten-free"</tspan>],</text>
+  <text class="mono code-line wild-department" x="66" y="280"><tspan class="k">department</tspan>: <tspan class="s">"Bakery"</tspan></text>
   <g class="wild-ran">
     <rect class="pill stroke-high" x="468" y="214" width="128" height="34" rx="10"/>
     <text class="mono small ink-high" x="532" y="236" text-anchor="middle">164 ms*</text>

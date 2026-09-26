@@ -19,7 +19,7 @@
         <div class="opening-body">
           <div class="opening-text">
             <p class="text-accent">Thinking can be described in two modes: System One is fast and intuitive, System Two is slow and deliberate. LLMs can support both, but thorough reasoning takes time and compute.</p>
-            <p class="standfirst">System One models skips text generation. Given state and a classification question with predefined answer types, they predict probabilities in a single forward pass.</p>
+            <p class="standfirst">System One models skip text generation. Given state and a bounded question with predefined answer types, they predict probabilities in a single forward pass.</p>
             <p class="text-accent">This produces fast, low-cost predictions with scores that express the model’s confidence. This guide explains how the approach works, then applies it to software design.</p>
             <!-- <ul class="legend">
               <li><span class="swatch swatch-choice"></span><span class="legend-term">Recognize</span><span>identify a familiar pattern</span></li>
@@ -62,9 +62,10 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>In the distinction popularized by Daniel Kahneman, System One is automatic and associative; System Two requires attention and effort. These are descriptions of processing, not two literal compartments in the brain.</p>
-            <p>Recognizing a familiar word may happen without a conscious sequence of steps. Checking a multi-digit calculation usually requires holding intermediate results in mind. Experience and context affect which tasks feel effortless.</p>
-            <p>Speed alone does not establish accuracy. An immediate impression can be useful or misleading, and deliberate thought can also produce errors. Very useful for some scenarios, not a good fit for everything. </p>
+            <p>In the framework popularized by Daniel Kahneman, System One operates automatically and associatively, whereas System Two demands focus and conscious effort. These are descriptions of processing, not two literal compartments in the brain.
+</p>
+            <p>For example, recognizing a word happens instantly, while multi-digit math demands step-by-step mental effort. </p>
+            <p>What feels effortless shifts with experience, but speed doesn’t guarantee accuracy. Intuition and deliberate analysis are both capable of error. Rapid impressions may work well in familiar territory, but complex tasks always require deliberate checking.</p>
             <p class="aside">Select an example in the diagram. The paths illustrate the distinction; they do not measure cognition or show neural activity. Background: Kahneman’s <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/">Nobel lecture</a>.</p>
           </div>
           <div class="plates">
@@ -81,10 +82,9 @@
         </header>
         <div class="sheet-body">
           <div class="notes">
-            <p>In software, one useful analogy to a fast judgment is classification: map an input to a defined category. A support message might concern billing, an integration problem, or a sales inquiry.</p>
-            <p>The answer space determines what the system can express. Include an “other” or “insufficient information” outcome when the categories do not cover every case.</p>
-            <p>These towers show a categorical probability distribution. The values sum to 1. Switching presets demonstrates how a clear preference differs from a tie. The values are illustrative, not measured human judgments.</p>
-            <p class="aside">This begins the software portion of the guide. Explicit probabilities are an interface design choice; they are not a defining property of human System One thinking.</p>
+            <p>In software architecture, classification serves as a natural analogue to quick human judgment: both rapidly map a complex input to a predetermined category. A customer support message, for instance, might be routed to billing, technical integration, or sales.</p>
+            <p>The answer space determines what the system can express. Because a system can only express what its answer space allows, including graceful fallback categories like "other" or "insufficient information" is essential.</p>
+            <p>The visualizations here illustrate categorical probability distributions, where the sum of all outcomes equals 1. Toggling between presets demonstrates the contrast between a decisive confidence score and a near-tie.</p>
           </div>
           <div class="plates">
             <figure class="plate"><div class="stage" data-scene="choice"></div></figure>
@@ -244,7 +244,7 @@ if (confidence &lt; 0.5) {
 
     <footer class="colophon">
       <p><strong>Reading further.</strong> Start with Daniel Kahneman’s <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/">Maps of Bounded Rationality</a> for the psychological distinction. The software diagrams here are teaching examples. <a href="https://docs.typesafe.ai/concepts/system-one">TypeSafe’s documentation</a> describes its particular use of the term.</p>
-      <p class="mono">All demos run locally without model requests. By <a href="https://sarah.dev">Sarah Drasner</a>. <a href="https://github.com/sdras/jev-explainer">Source</a>.</p>
+      <p class="mono">All demos run locally without model requests. By <a href="https://sarah.dev">Sarah Drasner</a>. <a href="https://github.com/sdras/system-one-explainer">Source</a>.</p>
     </footer>
   </body>
 </html>

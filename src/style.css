@@ -1170,3 +1170,172 @@ h2 { grid-column: 2; font-size: clamp(38px,4vw,58px); }
 /* Playback controls occupy their own row, clear of figure content. */
 .playback-controls { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
 .playback-controls .replay { position: static; min-width: 64px; min-height: 40px; padding: 8px 14px; }
+
+/* Opening experiment: a message becomes a distribution, then a decision. */
+.judgment {
+  --decision-color: var(--noul);
+  border-block: 1px solid var(--line);
+  background: radial-gradient(ellipse at 45% 42%, #0b294255, transparent 65%);
+}
+.judgment[data-route="review"] { --decision-color: var(--mid); }
+.judgment[data-route="context"] { --decision-color: var(--low); }
+.judgment-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 16px;
+  font: 12px/1.5 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--noul);
+}
+.judgment-heading i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  background: var(--noul);
+  box-shadow: 0 0 14px #7fdbca55;
+}
+.judgment-example-count { color: var(--muted); letter-spacing: 0; }
+.judgment-examples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.judgment-examples button {
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-right: 0;
+  background: var(--bg);
+  color: var(--muted);
+  font: 14px/1.4 var(--sans);
+  cursor: pointer;
+  transition: color .15s, background .15s;
+}
+.judgment-examples button:last-child { border-right: 1px solid var(--line); }
+.judgment-examples button:hover { background: var(--surface); color: var(--text); }
+.judgment-examples button[aria-pressed="true"] {
+  color: var(--text);
+  background: #102b43;
+  box-shadow: inset 0 -2px var(--accent);
+}
+.judgment-examples button:focus-visible { position: relative; z-index: 1; }
+.judgment-input { padding: 18px 20px 14px; border: 1px solid var(--line); border-top: 0; }
+.judgment-label { display: block; color: var(--muted); font: 12px/1.5 var(--mono); }
+.judgment-message {
+  min-height: 2.9em;
+  padding-block: 8px 4px;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.5;
+}
+.judgment-message mark { background: transparent; color: var(--noul); }
+.judgment-question { color: var(--muted); font-size: 13px; }
+.judgment-drawing { position: relative; padding-block: 5px 24px; }
+.stage .judgment-svg { max-width: none; overflow: visible; }
+.judgment-grid { fill: none; stroke: #24506f; stroke-width: .8; opacity: .6; }
+.judgment-wires { fill: none; stroke: #31526a; stroke-width: 1.5; }
+.judgment-signal {
+  fill: none;
+  stroke: var(--noul);
+  stroke-width: 2.5;
+  stroke-dasharray: 65 675;
+  stroke-dashoffset: 740;
+  opacity: 0;
+  filter: drop-shadow(0 0 4px #7fdbca88);
+}
+.judgment-svg .judgment-diagram-label { fill: var(--muted); font: 12px var(--mono); letter-spacing: .1em; }
+.judgment-chip-shadow { fill: #00070d; opacity: .8; }
+.judgment-chip-side { fill: #08283d; stroke: #3b6780; stroke-width: 1; }
+.judgment-chip-top { fill: url(#judgment-chip-face); stroke: var(--noul); stroke-width: 1.4; }
+.judgment-chip-rim { fill: #0b3145; stroke: #7fdbca66; }
+.judgment-chip-circuit { fill: none; stroke: #7fdbca44; }
+.judgment-chip-flash { fill: var(--noul); opacity: 0; }
+.judgment-svg .judgment-chip-type { fill: var(--noul); font: 700 30px var(--display); }
+.judgment-chip-pins { fill: none; stroke: #81c1bc; stroke-width: 2; }
+.judgment-svg .judgment-pass-note { fill: var(--text); font: 13px var(--mono); }
+.judgment-svg .judgment-pass-subnote { fill: var(--muted); font-size: 12px; }
+.judgment-plinth { fill: var(--panel); stroke: #3b5670; }
+.judgment-tower-front { fill: var(--tower-color); fill-opacity: .65; }
+.judgment-tower-side { fill: var(--tower-color); fill-opacity: .3; }
+.judgment-tower-top { fill: var(--tower-color); fill-opacity: .9; }
+.judgment-tower-edge { fill: none; stroke: var(--tower-color); stroke-opacity: .65; stroke-width: 1; }
+.judgment-tower.is-leading .judgment-tower-top { filter: drop-shadow(0 0 7px color-mix(in srgb, var(--tower-color) 35%, transparent)); }
+.judgment-svg .judgment-tower-value { fill: var(--tower-color); font: 500 23px var(--mono); }
+.judgment-svg .judgment-tower-label { fill: var(--body); font: 14px var(--sans); }
+.judgment-cutoff-line path { fill: none; stroke: var(--mid); stroke-width: 1; stroke-dasharray: 4 5; }
+.judgment-cutoff-line .judgment-cutoff-handle { fill: var(--mid); stroke: none; }
+.judgment-cutoff-line text { fill: var(--mid); font: 12px var(--mono); paint-order: stroke; stroke: var(--bg); stroke-width: 5px; stroke-linejoin: round; }
+.judgment-replay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 5px 0 5px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: 12px var(--sans);
+  cursor: pointer;
+}
+.judgment-replay span { color: var(--noul); font-size: 21px; }
+.judgment-replay:hover { color: var(--text); }
+.judgment-policy { padding-block: 12px 18px; }
+.judgment-policy-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; }
+.judgment-cutoff-value { color: var(--mid); font: 17px var(--mono); }
+.judgment-policy input {
+  --range-fill: 67.8%;
+  display: block;
+  width: 100%;
+  height: 32px;
+  margin: 2px 0;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+  accent-color: var(--mid);
+}
+.judgment-policy input::-webkit-slider-runnable-track { height: 3px; background: linear-gradient(to right, var(--mid) var(--range-fill), var(--line) var(--range-fill)); }
+.judgment-policy input::-moz-range-track { height: 3px; background: var(--line); }
+.judgment-policy input::-moz-range-progress { height: 3px; background: var(--mid); }
+.judgment-policy input::-webkit-slider-thumb { width: 13px; height: 19px; margin-top: -8px; appearance: none; border: 2px solid var(--mid); border-radius: 0; background: var(--bg); }
+.judgment-policy input::-moz-range-thumb { width: 9px; height: 15px; border: 2px solid var(--mid); border-radius: 0; background: var(--bg); }
+.judgment-range-labels { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 12px; }
+.judgment-range-labels span:last-child { text-align: right; }
+.judgment-result {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 82px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--decision-color);
+  background: color-mix(in srgb, var(--decision-color) 5%, var(--bg));
+}
+.judgment-route-icon { color: var(--decision-color); font: 30px/1 var(--mono); }
+.judgment-verdict { display: block; margin-top: 3px; color: var(--decision-color); font: 500 20px/1.3 var(--sans); }
+.judgment-comparison { margin-left: auto; color: var(--decision-color); font: 13px var(--mono); white-space: nowrap; }
+.judgment-explanation { min-height: 4.5em; padding-top: 14px; color: var(--body); font-size: 14px; line-height: 1.6; }
+.judgment-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 14px; padding-block: 16px; color: var(--muted); font-size: 12px; }
+.judgment-footer span:last-child { font-style: italic; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .opening-body { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 28px; }
+}
+@media (max-width: 600px) {
+  .judgment-input { padding-inline: 14px; }
+  .judgment-message { min-height: 3.5em; }
+  .judgment-result { gap: 10px; padding-inline: 12px; flex-wrap: wrap; }
+  .judgment-verdict { font-size: 18px; }
+  .judgment-comparison { font-size: 12px; }
+  .judgment-drawing { margin-inline: -8px; }
+  .judgment-svg .judgment-tower-value { font-size: 27px; }
+  .judgment-svg .judgment-tower-label { font-size: 22px; }
+  .judgment-svg .judgment-diagram-label { font-size: 17px; letter-spacing: 0; }
+  .judgment-svg .judgment-pass-note { font-size: 16px; }
+  .judgment-cutoff-line text { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .judgment-examples button { transition: none; }
+  .judgment-replay { display: none; }
+}

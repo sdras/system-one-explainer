@@ -39,7 +39,7 @@ export const markup = `
     <div class="sliders">
       <label><span class="mono">confidence</span> <output class="mono n">${START.toFixed(3)}</output><input type="range" min="0" max="1" step="0.001" value="${START}"></label>
     </div>
-    <div class="presets"><button type="button" data-drop="${START}">Review example · 0.780</button><button type="button" data-drop="1.000">High score · 1.000</button></div>
+    <div class="presets"><button type="button" data-drop="0.320">Low confidence · 0.320</button><button type="button" data-drop="${START}">Review example · 0.780</button><button type="button" data-drop="1.000">High score · 1.000</button></div>
   </div>
 `;
 
